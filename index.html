@@ -6,120 +6,293 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="J.A.R.V.I.S." />
-  <title>J.A.R.V.I.S. MARK VII — Cổng Kết Nối Vĩnh Viễn</title>
+  <title>J.A.R.V.I.S. MARK VII — Cloud & Hybrid Command</title>
   <style>
     :root {
       --cyan: #00f0ff;
       --green: #00ff9d;
       --amber: #ffaa00;
+      --red: #ff3b5c;
       --bg: #030811;
+      --card: rgba(7, 25, 46, 0.78);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at 50% 35%, #071f38 0%, #030811 70%);
+      background: radial-gradient(circle at 50% 25%, #071f38 0%, #030811 75%);
       color: #e4f9ff;
       font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 24px;
+      padding: 20px 16px 36px;
       text-align: center;
     }
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: 14px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(0, 240, 255, 0.07);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 20px;
+      background: rgba(0, 255, 157, 0.15);
+      color: var(--green);
+      border: 1px solid var(--green);
+    }
     .reactor {
-      width: 110px;
-      height: 110px;
+      width: 84px;
+      height: 84px;
       border-radius: 50%;
-      border: 3px solid var(--cyan);
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.55), inset 0 0 25px rgba(0, 240, 255, 0.35);
+      border: 2.5px solid var(--cyan);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.55), inset 0 0 20px rgba(0, 240, 255, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 22px;
+      margin: 6px 0 12px;
       position: relative;
       animation: pulse 1.8s infinite ease-in-out;
+      cursor: pointer;
     }
     .reactor::after {
       content: "";
       position: absolute;
-      inset: 10px;
+      inset: 8px;
       border-radius: 50%;
       border: 2px dashed var(--green);
       animation: spin 6s linear infinite;
     }
     .core {
-      width: 42px;
-      height: 42px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: radial-gradient(circle, #ffffff 0%, var(--cyan) 70%);
-      box-shadow: 0 0 20px var(--cyan);
+      box-shadow: 0 0 18px var(--cyan);
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      50% { transform: scale(1.06); }
     }
     h1 {
-      font-size: 21px;
+      font-size: 19px;
       letter-spacing: 2px;
       color: var(--cyan);
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
     .status {
-      font-size: 14px;
-      color: #9ad8ec;
-      max-width: 340px;
-      line-height: 1.5;
-      margin-bottom: 20px;
+      font-size: 13.5px;
+      color: #a8e4f7;
+      max-width: 460px;
+      line-height: 1.45;
+      margin-bottom: 14px;
     }
-    .actions {
-      display: none;
-      flex-direction: column;
-      gap: 10px;
+    .panel {
       width: 100%;
-      max-width: 340px;
-      margin-top: 8px;
+      max-width: 480px;
+      background: var(--card);
+      border: 1px solid rgba(0, 240, 255, 0.28);
+      border-radius: 16px;
+      padding: 15px;
+      margin-bottom: 12px;
+      text-align: left;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+    }
+    .panel-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--cyan);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .reply-box {
+      background: rgba(2, 12, 24, 0.85);
+      border: 1px solid rgba(0, 255, 157, 0.35);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #eafcff;
+      margin-bottom: 12px;
+      min-height: 54px;
+    }
+    .chat-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .chat-input {
+      flex: 1;
+      background: rgba(0, 18, 36, 0.9);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      color: #fff;
+      padding: 11px 13px;
+      border-radius: 12px;
+      font-size: 14px;
+      outline: none;
     }
     .btn {
-      display: block;
-      width: 100%;
-      padding: 13px 16px;
-      border-radius: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 14px;
+      border-radius: 12px;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13.5px;
       text-decoration: none;
       border: 1px solid var(--cyan);
       background: rgba(0, 240, 255, 0.14);
       color: #e4f9ff;
       cursor: pointer;
+      transition: all 0.15s ease;
     }
+    .btn:active { transform: scale(0.97); }
     .btn.primary {
       background: linear-gradient(135deg, #00f0ff, #0077ff);
       color: #01101f;
       border: none;
     }
-    .btn.lan {
+    .btn.green {
       border-color: var(--green);
-      color: var(--green);
-      background: rgba(0, 255, 157, 0.12);
+      color: #011a10;
+      background: linear-gradient(135deg, #00ff9d, #00b86b);
+      border: none;
     }
+    .btn.amber {
+      border-color: var(--amber);
+      color: var(--amber);
+      background: rgba(255, 170, 0, 0.13);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .custom-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .num-input {
+      width: 82px;
+      background: rgba(0, 18, 36, 0.9);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      color: var(--cyan);
+      font-weight: 700;
+      padding: 9px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 13.5px;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: #9ad8ec;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .stat-val { font-weight: 700; color: #fff; }
   </style>
 </head>
 <body>
-  <div class="reactor"><div class="core"></div></div>
-  <h1>J.A.R.V.I.S. MARK VII</h1>
-  <div class="status" id="statusText">⚡ Đang định vị đường hầm bảo mật tới MacBook M3 Pro của Anh Đạt...</div>
-  <div class="actions" id="fallbackActions">
-    <a class="btn primary" id="btnTunnel" href="#">🌐 Kết nối qua Cloud Tunnel (4G / Wi-Fi)</a>
-    <a class="btn lan" id="btnLan" href="#">📶 Kết nối trực tiếp Wi-Fi Nhà (LAN)</a>
-    <button class="btn" onclick="location.reload()">🔄 Thử kết nối lại</button>
+  <div class="header-bar">
+    <span style="font-size:12px; font-weight:700; color:var(--cyan);">⚡ J.A.R.V.I.S. MARK VII</span>
+    <span class="badge" id="modeBadge">☁️ CLOUD 24/7 (ĐỘC LẬP MÁY TÍNH)</span>
+  </div>
+
+  <div class="reactor" id="micReactor" onclick="toggleVoiceCommand()" title="Chạm để nói lệnh với J.A.R.V.I.S.">
+    <div class="core"></div>
+  </div>
+  <h1>J.A.R.V.I.S. COMMAND</h1>
+  <div class="status" id="statusText">🎙️ Chạm vào Lò phản ứng hoặc nhập lệnh bên dưới (VD: "Buff 50 mắt 30 phút")</div>
+
+  <div class="panel" id="cloudConsole" style="display:none;">
+    <div class="panel-title">
+      <span>🤖 TRỢ LÝ J.A.R.V.I.S. (CHỈ BƠM KHI CÓ LỆNH)</span>
+      <button class="btn" style="padding:4px 9px; font-size:11px;" onclick="toggleVoiceCommand()">🎙️ Nói Lệnh</button>
+    </div>
+    <div class="reply-box" id="jarvisReply">
+      Dạ Anh Đạt, J.A.R.V.I.S. Cloud đã sẵn sàng 24/7 (hoạt động ngay cả khi MacBook tắt). Anh muốn bơm bao nhiêu mắt cho kênh <b>@bonbon.cute</b> ạ?
+    </div>
+    <div class="chat-row">
+      <input type="text" id="cmdInput" class="chat-input" placeholder="Nhập lệnh: Buff 50 mắt 30 phút..." onkeydown="if(event.key==='Enter') handleUserCommand()" />
+      <button class="btn primary" onclick="handleUserCommand()">Gửi</button>
+    </div>
+
+    <div class="panel-title" style="margin-top:14px;">
+      <span>🚀 BƠM MẮT LIVE @bonbon.cute (LIKE3S SV280)</span>
+      <span style="color:var(--green); font-size:11px;">Tắt Auto · Bơm Theo Lệnh</span>
+    </div>
+    <div class="grid-2">
+      <button class="btn green" onclick="triggerCloudLike3s('buff', 50, 30)">🚀 +50 Mắt (30 Phút)</button>
+      <button class="btn green" onclick="triggerCloudLike3s('buff', 100, 30)">🔥 +100 Mắt (30 Phút)</button>
+      <button class="btn amber" onclick="triggerCloudLike3s('buff', 100, 60)">💎 +100 Mắt (60 Phút)</button>
+      <button class="btn" onclick="triggerCloudLike3s('status', 50, 30)">📊 Check Live & Số Dư</button>
+    </div>
+    <div class="custom-row">
+      <span style="font-size:12px; color:#9ad8ec;">Tuỳ chỉnh:</span>
+      <input type="number" id="customQty" class="num-input" value="50" min="50" step="10" />
+      <span style="font-size:12px;">mắt</span>
+      <input type="number" id="customDur" class="num-input" value="30" min="30" step="15" />
+      <span style="font-size:12px;">phút</span>
+      <button class="btn primary" style="flex:1; padding:9px;" onclick="triggerCustomBuff()">⚡ Bơm Ngay</button>
+    </div>
+
+    <div style="margin-top:12px; padding-top:8px; border-top:1px solid rgba(0,240,255,0.2);">
+      <div class="stat-row"><span>Kênh TikTok:</span><span class="stat-val" id="stChannel">@bonbon.cute</span></div>
+      <div class="stat-row"><span>Trạng thái Live:</span><span class="stat-val" id="stLive">Đang kiểm tra...</span></div>
+      <div class="stat-row"><span>Số dư ví Like3s:</span><span class="stat-val" id="stBalance">-- VNĐ</span></div>
+      <div class="stat-row"><span>Đơn gần nhất:</span><span class="stat-val" id="stLastOrder">Chưa có lệnh mới</span></div>
+    </div>
+  </div>
+
+  <div class="panel" id="macLinksPanel" style="display:none;">
+    <div class="panel-title">
+      <span>🖥️ KẾT NỐI MACBOOK M3 PRO</span>
+      <span id="macOnlineStatus" style="font-size:11px; color:var(--amber);">Đang dò...</span>
+    </div>
+    <div class="grid-2">
+      <a class="btn" id="btnTunnel" href="#">🌐 Mở HUD MacBook (4G)</a>
+      <a class="btn" id="btnLan" href="#">📶 Mở HUD MacBook (Wi-Fi)</a>
+    </div>
   </div>
 
   <script>
     const REPO = "datlequoc95-sketch/jarvis-gateway";
-    const statusEl = document.getElementById("statusText");
-    const actionsEl = document.getElementById("fallbackActions");
+    let CLOUD_CFG = null;
+    let isListening = false;
+
+    function speakVN(text) {
+      try {
+        if (!("speechSynthesis" in window)) return;
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g, ""));
+        u.lang = "vi-VN";
+        u.rate = 1.05;
+        window.speechSynthesis.speak(u);
+      } catch (e) {}
+    }
+
+    function setJarvisReply(htmlText, speak = true) {
+      const el = document.getElementById("jarvisReply");
+      if (el) el.innerHTML = htmlText;
+      if (speak) speakVN(htmlText);
+    }
 
     function getParams() {
       const hash = window.location.hash.replace(/^#/, "");
@@ -173,7 +346,6 @@
     }
 
     async function fetchEncryptedEndpoint() {
-      // Ưu tiên 1: GitHub REST API (0 giây cache, luôn mới nhất tức thì)
       try {
         const apiRes = await fetch(`https://api.github.com/repos/${REPO}/contents/endpoint.json?t=${Date.now()}`, {
           headers: { "Accept": "application/vnd.github.v3+json" },
@@ -188,13 +360,12 @@
         }
       } catch (e) {}
 
-      // Ưu tiên 2: File tĩnh cùng trang
       const staticRes = await fetch(`./endpoint.json?t=${Date.now()}`, { cache: "no-store" });
       if (!staticRes.ok) throw new Error("Không tải được endpoint.json");
       return await staticRes.json();
     }
 
-    function probeImageUrl(baseUrl, timeoutMs = 3500) {
+    function probeImageUrl(baseUrl, timeoutMs = 2600) {
       return new Promise((resolve) => {
         if (!baseUrl) return resolve(false);
         let settled = false;
@@ -212,18 +383,174 @@
       });
     }
 
+    async function loadLatestCloudStatus() {
+      if (!CLOUD_CFG || !CLOUD_CFG.gh_token) return null;
+      const execRepo = CLOUD_CFG.cloud_repo || "datlequoc95-sketch/like3s-bonbon-autobuff";
+      try {
+        const r = await fetch(`https://api.github.com/repos/${execRepo}/contents/cloud_result.json?t=${Date.now()}`, {
+          headers: {
+            "Authorization": `Bearer ${CLOUD_CFG.gh_token}`,
+            "Accept": "application/vnd.github.v3+json"
+          },
+          cache: "no-store"
+        });
+        if (!r.ok) return null;
+        const meta = await r.json();
+        const raw = new TextDecoder().decode(Uint8Array.from(atob(meta.content.replace(/\s/g, "")), c => c.charCodeAt(0)));
+        const res = JSON.parse(raw);
+        updateStatsUI(res);
+        return res;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function updateStatsUI(res) {
+      if (!res) return;
+      document.getElementById("stLive").innerHTML = res.is_live
+        ? `<span style="color:var(--green);">🟢 ĐANG LIVE (${res.viewer_count || 0} mắt thực)</span>`
+        : `<span style="color:#9ad8ec;">⚪ Offline</span>`;
+      if (typeof res.balance === "number") {
+        document.getElementById("stBalance").innerText = res.balance.toLocaleString("vi-VN") + " VNĐ";
+      }
+      if (res.order_id) {
+        document.getElementById("stLastOrder").innerHTML = `<span style="color:var(--cyan);">#${res.order_id} (+${res.quantity} mắt / ${res.duration_min}p)</span>`;
+      }
+    }
+
+    async function triggerCloudLike3s(action, quantity = 50, duration_min = 30) {
+      if (!CLOUD_CFG || !CLOUD_CFG.gh_token) {
+        setJarvisReply("⚠️ Chưa có khóa kết nối Cloud. Anh Đạt vui lòng mở link kèm khóa #k=...", true);
+        return;
+      }
+      const execRepo = CLOUD_CFG.cloud_repo || "datlequoc95-sketch/like3s-bonbon-autobuff";
+      const reqId = `jarvis_${Date.now()}`;
+
+      if (action === "buff") {
+        setJarvisReply(`🚀 Đang thực thi lệnh trên Cloud: Bơm <b>+${quantity} mắt</b> trong <b>${duration_min} phút</b> cho <b>@bonbon.cute</b>... (Vui lòng đợi ~10 giây)`, true);
+      } else {
+        setJarvisReply(`🔍 J.A.R.V.I.S. Cloud đang kiểm tra trạng thái Live của <b>@bonbon.cute</b> và số dư ví Like3s...`, true);
+      }
+
+      try {
+        const disp = await fetch(`https://api.github.com/repos/${execRepo}/actions/workflows/jarvis_command.yml/dispatches`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${CLOUD_CFG.gh_token}`,
+            "Accept": "application/vnd.github.v3+json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            ref: "main",
+            inputs: {
+              action: String(action),
+              quantity: String(quantity),
+              duration_min: String(duration_min),
+              req_id: reqId
+            }
+          })
+        });
+
+        if (!disp.ok) {
+          setJarvisReply(`❌ Lỗi gửi lệnh lên Cloud (HTTP ${disp.status}).`, true);
+          return;
+        }
+
+        // Chờ kết quả trả về từ Cloud (poll mỗi 2.5 giây)
+        for (let i = 0; i < 14; i++) {
+          await new Promise(r => setTimeout(r, 2500));
+          const latest = await loadLatestCloudStatus();
+          if (latest && latest.req_id === reqId) {
+            setJarvisReply(latest.message || "✅ Đã hoàn tất lệnh trên Cloud!", true);
+            return;
+          }
+        }
+        setJarvisReply("✅ Đã gửi lệnh lên Cloud thành công! Kết quả cũng sẽ được báo về Telegram @gmvmax_bonbon_bot.", true);
+      } catch (err) {
+        setJarvisReply("⚠️ Lỗi kết nối Cloud: " + (err.message || err), true);
+      }
+    }
+
+    function triggerCustomBuff() {
+      const q = parseInt(document.getElementById("customQty").value || "50", 10);
+      const d = parseInt(document.getElementById("customDur").value || "30", 10);
+      triggerCloudLike3s("buff", Math.max(50, q), Math.max(30, d));
+    }
+
+    function handleUserCommand(rawText) {
+      const inputEl = document.getElementById("cmdInput");
+      const text = (rawText || (inputEl ? inputEl.value : "")).trim();
+      if (!text) return;
+      if (inputEl && !rawText) inputEl.value = "";
+
+      const low = text.toLowerCase();
+      if (low.includes("số dư") || low.includes("kiểm tra") || low.includes("trạng thái") || low.includes("check") || low.includes("ví")) {
+        triggerCloudLike3s("status", 50, 30);
+        return;
+      }
+
+      if (low.includes("buff") || low.includes("bơm") || low.includes("mắt") || low.includes("view") || low.includes("đặt")) {
+        let qty = 50;
+        let dur = 30;
+        const mQty = low.match(/(\d+)\s*mắt/) || low.match(/(?:bơm|buff|đặt)\s+(\d+)/);
+        if (mQty) qty = Math.max(50, parseInt(mQty[1], 10));
+        const mDur = low.match(/(\d+)\s*(?:phút|p\b)/);
+        if (mDur) dur = Math.max(30, parseInt(mDur[1], 10));
+        else if (low.includes("1 tiếng") || low.includes("một tiếng")) dur = 60;
+
+        triggerCloudLike3s("buff", qty, dur);
+        return;
+      }
+
+      setJarvisReply(`Dạ Anh Đạt, ở chế độ Cloud độc lập máy tính, anh có thể nói hoặc nhắn: <b>"Buff 50 mắt 30 phút"</b>, <b>"Bơm 100 mắt 60 phút"</b> hoặc <b>"Kiểm tra mắt live và số dư"</b> ạ!`, true);
+    }
+
+    function toggleVoiceCommand() {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) {
+        alert("Trình duyệt này chưa hỗ trợ nhận diện giọng nói trực tiếp. Anh Đạt vui lòng nhập lệnh vào ô chat nhé!");
+        return;
+      }
+      if (isListening) return;
+      const rec = new SR();
+      rec.lang = "vi-VN";
+      rec.interimResults = false;
+      rec.maxAlternatives = 1;
+      isListening = true;
+      document.getElementById("statusText").innerText = "🎙️ J.A.R.V.I.S. đang lắng nghe lệnh của Anh Đạt...";
+      rec.onresult = (e) => {
+        const transcript = e.results[0][0].transcript;
+        document.getElementById("cmdInput").value = transcript;
+        handleUserCommand(transcript);
+      };
+      rec.onerror = () => {
+        isListening = false;
+        document.getElementById("statusText").innerText = "🎙️ Chạm vào Lò phản ứng để nói lệnh với J.A.R.V.I.S.";
+      };
+      rec.onend = () => {
+        isListening = false;
+        document.getElementById("statusText").innerText = "🎙️ Chạm vào Lò phản ứng để nói lệnh với J.A.R.V.I.S.";
+      };
+      rec.start();
+    }
+
     async function boot() {
       const { k, next, mode } = getParams();
       if (!k) {
-        statusEl.innerHTML = "🔒 Thiết bị chưa có khóa ghép nối.<br/>Anh Đạt hãy mở HUD trên MacBook → mục <b>📱 iPhone & Siri</b> để quét mã QR 1 lần duy nhất.";
+        document.getElementById("statusText").innerHTML = "🔒 Thiết bị chưa có khóa ghép nối.<br/>Anh Đạt hãy mở HUD trên MacBook → mục <b>📱 iPhone & Siri</b> để quét mã QR 1 lần duy nhất.";
         return;
       }
 
       try {
         const env = await fetchEncryptedEndpoint();
         const data = await decryptEnvelope(env, k);
-        const targetPath = mode === "install" ? "/install" : next;
+        CLOUD_CFG = data;
 
+        document.getElementById("cloudConsole").style.display = "block";
+        document.getElementById("macLinksPanel").style.display = "block";
+        loadLatestCloudStatus();
+
+        const targetPath = mode === "install" ? "/install" : next;
         const tunnelPairUrl = data.tunnel_url
           ? `${data.tunnel_url}/pair?k=${encodeURIComponent(k)}&next=${encodeURIComponent(targetPath)}`
           : "";
@@ -234,28 +561,27 @@
         if (tunnelPairUrl) document.getElementById("btnTunnel").href = tunnelPairUrl;
         if (lanPairUrl) document.getElementById("btnLan").href = lanPairUrl;
 
-        // Kiểm tra song song Cloud Tunnel (kiểm tra thật bằng ảnh PNG để tránh lỗi HTTP 530 của Cloudflare)
-        if (data.tunnel_url) {
-          statusEl.innerText = "🌐 Đang kết nối đường hầm Cloud HTTPS...";
-          const tunnelOk = await probeImageUrl(data.tunnel_url, 3200);
-          if (tunnelOk) {
+        // Kiểm tra xem MacBook M3 Pro có đang mở không
+        const tunnelOk = data.tunnel_url ? await probeImageUrl(data.tunnel_url, 2500) : false;
+        if (tunnelOk) {
+          document.getElementById("macOnlineStatus").innerHTML = "🟢 MacBook Đang Bật (Bấm bên dưới nếu muốn vào HUD Mac)";
+          document.getElementById("macOnlineStatus").style.color = "var(--green)";
+          if (mode === "mac") {
             window.location.replace(tunnelPairUrl);
             return;
           }
+        } else {
+          const lanOk = data.lan_url ? await probeImageUrl(data.lan_url, 1800) : false;
+          if (lanOk) {
+            document.getElementById("macOnlineStatus").innerHTML = "🟢 MacBook Đang Bật (Wi-Fi LAN)";
+            document.getElementById("macOnlineStatus").style.color = "var(--green)";
+          } else {
+            document.getElementById("macOnlineStatus").innerHTML = "🌙 MacBook Đang Tắt / Gập Máy — Đang chạy Cloud 24/7";
+            document.getElementById("macOnlineStatus").style.color = "var(--cyan)";
+          }
         }
-
-        // Nếu Cloud Tunnel bị nhà mạng chặn DNS hoặc đang khởi động -> chuyển ngay sang LAN Wi-Fi
-        if (lanPairUrl) {
-          statusEl.innerText = "📶 Đang chuyển sang kết nối Wi-Fi nội bộ siêu tốc...";
-          actionsEl.style.display = "flex";
-          window.location.replace(lanPairUrl);
-          return;
-        }
-
-        actionsEl.style.display = "flex";
       } catch (err) {
-        statusEl.innerText = "⚠️ Không thể giải mã hoặc kết nối: " + (err.message || err);
-        actionsEl.style.display = "flex";
+        document.getElementById("statusText").innerText = "⚠️ Không thể giải mã hoặc kết nối: " + (err.message || err);
       }
     }
 
