@@ -20,44 +20,45 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      min-height: 100vh;
+      min-height: 100dvh;
       background: radial-gradient(circle at 50% 20%, #071f38 0%, #030811 75%);
       color: #e4f9ff;
       font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 12px 12px 28px;
+      padding: 8px 8px 20px;
     }
     .app-shell {
       width: 100%;
       max-width: 780px;
+      min-height: calc(100dvh - 20px);
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
     .header-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 14px;
-      border-radius: 14px;
+      padding: 8px 12px;
+      border-radius: 13px;
       background: rgba(3, 14, 28, 0.92);
       border: 1px solid var(--border);
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
     }
     .brand-title {
       font-weight: 900;
       font-size: 16px;
-      letter-spacing: 1.8px;
+      letter-spacing: 1.5px;
       color: var(--cyan);
       display: flex;
       align-items: center;
       gap: 8px;
     }
     .badge {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       padding: 4px 10px;
       border-radius: 20px;
@@ -68,21 +69,21 @@
     /* THANH CHUYỂN 2 TAB CHÍNH */
     .main-tabs {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       background: rgba(3, 12, 24, 0.92);
-      padding: 6px;
-      border-radius: 14px;
+      padding: 5px;
+      border-radius: 13px;
       border: 1px solid var(--border);
     }
     .tab-btn {
       flex: 1;
-      padding: 11px 12px;
+      padding: 11px 10px;
       border-radius: 10px;
       border: 1px solid transparent;
       background: transparent;
       color: #8cc6db;
       font-weight: 700;
-      font-size: 13.5px;
+      font-size: 14.5px;
       cursor: pointer;
       transition: all 0.18s;
       text-align: center;
@@ -102,13 +103,19 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 14px;
+      padding: 12px;
       box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
     }
+    #tabChatPanel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100dvh - 130px);
+    }
     .panel-title {
-      font-size: 12.5px;
+      font-size: 13.5px;
       font-weight: 800;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.6px;
       color: var(--cyan);
       margin-bottom: 10px;
       display: flex;
@@ -121,20 +128,21 @@
     .reactor-row {
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 10px 14px;
+      gap: 11px;
+      padding: 8px 12px;
       background: rgba(0, 240, 255, 0.05);
       border: 1px solid rgba(0, 240, 255, 0.18);
-      border-radius: 14px;
-      margin-bottom: 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      flex-shrink: 0;
     }
     .reactor {
-      width: 58px;
-      height: 58px;
+      width: 44px;
+      height: 44px;
       flex-shrink: 0;
       border-radius: 50%;
       border: 2.5px solid var(--cyan);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.5), inset 0 0 14px rgba(0, 240, 255, 0.3);
+      box-shadow: 0 0 18px rgba(0, 240, 255, 0.5), inset 0 0 12px rgba(0, 240, 255, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -145,84 +153,89 @@
     .reactor::after {
       content: "";
       position: absolute;
-      inset: 6px;
+      inset: 5px;
       border-radius: 50%;
       border: 1.5px dashed var(--green);
       animation: spin 6s linear infinite;
     }
     .core {
-      width: 22px;
-      height: 22px;
+      width: 17px;
+      height: 17px;
       border-radius: 50%;
       background: radial-gradient(circle, #ffffff 0%, var(--cyan) 70%);
-      box-shadow: 0 0 12px var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.06); }
     }
-    /* KHUNG LỊCH SỬ CHAT ĐA NĂNG */
+    /* KHUNG LỊCH SỬ CHAT ĐA NĂNG — RỘNG RÃI & CHỮ TO RÕ TRÊN ĐIỆN THOẠI */
     .messages-area {
-      height: 360px;
+      flex: 1;
+      min-height: 58dvh;
+      max-height: 70dvh;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      padding: 12px;
-      background: rgba(2, 10, 20, 0.85);
-      border: 1px solid rgba(0, 240, 255, 0.2);
-      border-radius: 12px;
+      gap: 12px;
+      padding: 14px 12px;
+      background: rgba(2, 10, 20, 0.88);
+      border: 1px solid rgba(0, 240, 255, 0.24);
+      border-radius: 14px;
       margin-bottom: 10px;
+      -webkit-overflow-scrolling: touch;
     }
     .msg {
-      max-width: 88%;
-      padding: 10px 13px;
-      border-radius: 12px;
-      font-size: 13.5px;
-      line-height: 1.5;
+      max-width: 95%;
+      padding: 13px 16px;
+      border-radius: 14px;
+      font-size: 17.5px;
+      line-height: 1.62;
       word-break: break-word;
     }
     .msg.user {
       align-self: flex-end;
-      background: linear-gradient(135deg, rgba(0, 119, 255, 0.35), rgba(0, 240, 255, 0.22));
+      background: linear-gradient(135deg, rgba(0, 119, 255, 0.4), rgba(0, 240, 255, 0.25));
       border: 1px solid var(--cyan);
       color: #fff;
     }
     .msg.jarvis {
       align-self: flex-start;
-      background: rgba(6, 26, 48, 0.92);
-      border: 1px solid rgba(0, 255, 157, 0.38);
-      color: #eafcff;
+      background: rgba(6, 26, 48, 0.95);
+      border: 1px solid rgba(0, 255, 157, 0.42);
+      border-left: 3.5px solid var(--cyan);
+      color: #f0fdff;
     }
     .msg-meta {
-      font-size: 10.5px;
-      color: #7ab8cc;
-      margin-bottom: 4px;
-      font-weight: 600;
+      font-size: 13px;
+      color: #8ad0e6;
+      margin-bottom: 5px;
+      font-weight: 700;
     }
     .chat-row {
       display: flex;
       gap: 8px;
+      flex-shrink: 0;
     }
     .chat-input {
       flex: 1;
-      background: rgba(0, 18, 36, 0.95);
-      border: 1px solid rgba(0, 240, 255, 0.4);
+      background: rgba(0, 18, 36, 0.96);
+      border: 1.5px solid rgba(0, 240, 255, 0.45);
       color: #fff;
-      padding: 11px 13px;
+      padding: 13px 15px;
       border-radius: 12px;
-      font-size: 14px;
+      font-size: 16.5px;
       outline: none;
     }
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 10px 13px;
-      border-radius: 11px;
+      padding: 12px 15px;
+      border-radius: 12px;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 14.5px;
       text-decoration: none;
       border: 1px solid rgba(0, 240, 255, 0.35);
       background: rgba(0, 240, 255, 0.12);
@@ -330,11 +343,11 @@
           <div class="core"></div>
         </div>
         <div style="flex:1;">
-          <div style="font-weight:800; font-size:14px; color:var(--cyan); margin-bottom:3px;">
+          <div style="font-weight:800; font-size:14.5px; color:var(--cyan); margin-bottom:2px;">
             TRỢ LÝ AI ĐA NĂNG J.A.R.V.I.S. (VIỆT / ANH)
           </div>
-          <div id="statusText" style="font-size:12.5px; color:#9ad8ec; line-height:1.4;">
-            🎙️ Bấm vào Lò phản ứng để nói hoặc nhắn tin bên dưới để trao đổi công việc, viết nội dung, lên đơn buff mắt hoặc điều khiển quảng cáo.
+          <div id="statusText" style="font-size:13.5px; color:#9ad8ec; line-height:1.35;">
+            🎙️ Chạm Lò phản ứng để nói hoặc nhắn tin bên dưới.
           </div>
         </div>
       </div>
@@ -343,7 +356,7 @@
       <div class="messages-area" id="messagesArea">
         <div class="msg jarvis">
           <div class="msg-meta">⚡ J.A.R.V.I.S. MARK VII</div>
-          <div>Dạ chào Anh Đạt! Em đã chia giao diện thành 2 Tab rõ ràng:
+          <div>Dạ chào Anh Đạt! Em đã mở rộng khung chat và tăng cỡ chữ lớn, rõ nét trên điện thoại:
             <br/>• <b>💬 Khung Chat & Làm Việc Đa Năng</b>: Để anh em mình trò chuyện, xử lý công việc, phân tích ý tưởng hoặc ra lệnh bằng giọng nói.
             <br/>• <b>🚀 Quảng Cáo GMV • Buff Mắt • Quản Lý Tool</b>: Tab chuyên biệt tích hợp toàn bộ nút điều khiển Quảng Cáo TikTok GMV Max, Buff Mắt Livestream Like3s (chỉ bơm theo lệnh, hoạt động cả khi tắt máy tính) và Quản lý dàn Tool.
           </div>
@@ -353,7 +366,7 @@
       <!-- Ô nhập chat -->
       <div class="chat-row">
         <button class="btn green" onclick="toggleVoiceCommand()" title="Nói bằng giọng nói">🎙️ Nói</button>
-        <input type="text" id="cmdInput" class="chat-input" placeholder="Nhắn tin làm việc với J.A.R.V.I.S. hoặc ra lệnh (VD: Buff 50 mắt, Check GMV...)" onkeydown="if(event.key==='Enter') handleUserCommand()" />
+        <input type="text" id="cmdInput" class="chat-input" placeholder="Nhắn tin hoặc ra lệnh cho J.A.R.V.I.S. (VD: Buff 50 mắt, Check GMV...)" onkeydown="if(event.key==='Enter') handleUserCommand()" />
         <button class="btn primary" onclick="handleUserCommand()">Gửi ⚡</button>
       </div>
     </div>
@@ -367,9 +380,9 @@
       <div class="panel" style="border-color:var(--cyan); background:rgba(0, 240, 255, 0.08);">
         <div class="panel-title" style="margin-bottom:4px;">
           <span>⚡ BÁO CÁO THỰC THI LỆNH TRỰC TIẾP</span>
-          <button class="btn" style="padding:4px 9px; font-size:11px;" onclick="switchTab('chat')">💬 Xem Lịch Sử Chat</button>
+          <button class="btn" style="padding:5px 10px; font-size:12.5px;" onclick="switchTab('chat')">💬 Xem Lịch Sử Chat</button>
         </div>
-        <div id="opsLiveStatus" style="font-size:13px; color:#eafcff; line-height:1.5;">
+        <div id="opsLiveStatus" style="font-size:16px; color:#eafcff; line-height:1.58;">
           Sẵn sàng nhận lệnh từ Anh Đạt. Chọn các tuỳ chọn Quảng Cáo GMV Max, Buff Mắt Like3s hoặc Quản lý Tool bên dưới:
         </div>
       </div>
