@@ -356,8 +356,8 @@
       <div class="messages-area" id="messagesArea">
         <div class="msg jarvis">
           <div class="msg-meta">⚡ J.A.R.V.I.S. MARK VII</div>
-          <div>Dạ chào Anh Đạt! Em đã mở rộng khung chat và tăng cỡ chữ lớn, rõ nét trên điện thoại:
-            <br/>• <b>💬 Khung Chat & Làm Việc Đa Năng</b>: Để anh em mình trò chuyện, xử lý công việc, phân tích ý tưởng hoặc ra lệnh bằng giọng nói.
+          <div>Dạ chào Sếp! Em đã mở rộng khung chat và tăng cỡ chữ lớn, rõ nét trên điện thoại:
+            <br/>• <b>💬 Khung Chat & Làm Việc Đa Năng</b>: Để Sếp và em trò chuyện, xử lý công việc, phân tích ý tưởng hoặc ra lệnh bằng giọng nói.
             <br/>• <b>🚀 Quảng Cáo GMV • Buff Mắt • Quản Lý Tool</b>: Tab chuyên biệt tích hợp toàn bộ nút điều khiển Quảng Cáo TikTok GMV Max, Buff Mắt Livestream Like3s (chỉ bơm theo lệnh, hoạt động cả khi tắt máy tính) và Quản lý dàn Tool.
           </div>
         </div>
@@ -383,7 +383,7 @@
           <button class="btn" style="padding:5px 10px; font-size:12.5px;" onclick="switchTab('chat')">💬 Xem Lịch Sử Chat</button>
         </div>
         <div id="opsLiveStatus" style="font-size:16px; color:#eafcff; line-height:1.58;">
-          Sẵn sàng nhận lệnh từ Anh Đạt. Chọn các tuỳ chọn Quảng Cáo GMV Max, Buff Mắt Like3s hoặc Quản lý Tool bên dưới:
+          Sẵn sàng nhận lệnh từ Sếp. Chọn các tuỳ chọn Quảng Cáo GMV Max, Buff Mắt Like3s hoặc Quản lý Tool bên dưới:
         </div>
       </div>
 
@@ -515,7 +515,7 @@
       if (!area) return;
       const div = document.createElement("div");
       div.className = "msg " + (role === "user" ? "user" : "jarvis");
-      const label = metaLabel || (role === "user" ? "👑 ANH ĐẠT" : "⚡ J.A.R.V.I.S.");
+      const label = metaLabel || (role === "user" ? "👑 SẾP" : "⚡ J.A.R.V.I.S.");
       div.innerHTML = `<div class="msg-meta">${label} • ${new Date().toLocaleTimeString("vi-VN")}</div><div>${htmlText}</div>`;
       area.appendChild(div);
       area.scrollTop = area.scrollHeight;
@@ -646,7 +646,7 @@
 
     async function triggerCloudLike3s(action, quantity = 50, duration_min = 30) {
       if (!CLOUD_CFG || !CLOUD_CFG.gh_token) {
-        setOpsFeedback("⚠️ Chưa có khóa kết nối Cloud. Anh Đạt vui lòng mở link kèm khóa #k=...", true);
+        setOpsFeedback("⚠️ Chưa có khóa kết nối Cloud. Sếp vui lòng mở link kèm khóa #k=...", true);
         return;
       }
       const execRepo = CLOUD_CFG.cloud_repo || "datlequoc95-sketch/like3s-bonbon-autobuff";
@@ -737,7 +737,7 @@
       if (btnTunnel && btnTunnel.href && btnTunnel.href !== "#" && !btnTunnel.href.endsWith("#")) {
         setOpsFeedback(
           `💡 Lệnh <b>${fallbackPrompt || action}</b> sử dụng trình điều khiển trên MacBook. ` +
-          `Anh Đạt bấm <a href="${btnTunnel.href}" style="color:var(--cyan); font-weight:700; text-decoration:underline;">Vào Full HUD MacBook</a> để thực thi trực tiếp nhé! (Riêng <b>Buff Mắt Like3s</b> hoạt động 100% trên Cloud ngay cả khi tắt máy tính).`,
+          `Sếp bấm <a href="${btnTunnel.href}" style="color:var(--cyan); font-weight:700; text-decoration:underline;">Vào Full HUD MacBook</a> để thực thi trực tiếp nhé! (Riêng <b>Buff Mắt Like3s</b> hoạt động 100% trên Cloud ngay cả khi tắt máy tính).`,
           true
         );
       } else {
@@ -798,7 +798,7 @@
 
       // 3. Trợ lý AI Cloud trực tiếp khi MacBook đang tắt
       try {
-        const aiRes = await fetch(`https://text.pollinations.ai/${encodeURIComponent("Bạn là J.A.R.V.I.S., trợ lý AI trung thành của Anh Lê Quốc Đạt. Trả lời ngắn gọn, thông minh, lịch sự bằng tiếng Việt cho câu hỏi sau: " + text)}`);
+        const aiRes = await fetch(`https://text.pollinations.ai/${encodeURIComponent("Bạn là J.A.R.V.I.S., trợ lý AI trung thành của Sếp Lê Quốc Đạt. Trả lời ngắn gọn, thông minh, lịch sự: nếu câu hỏi tiếng Việt xưng 'Em' gọi 'Sếp', nếu tiếng Anh gọi 'Boss'. Câu hỏi: " + text)}`);
         if (aiRes.ok) {
           const replyTxt = (await aiRes.text()).trim();
           if (replyTxt) {
@@ -809,7 +809,7 @@
       } catch (e) {}
 
       setOpsFeedback(
-        `Dạ Anh Đạt, em đang ở chế độ Cloud 24/7. Anh có thể ra lệnh <b>"Buff 50 mắt 30 phút"</b>, <b>"Bơm 100 mắt 60 phút"</b>, <b>"Kiểm tra số dư Like3s"</b> hoặc chuyển sang Tab <b>🚀 Quảng Cáo GMV • Buff Mắt • Quản Lý Tool</b> nhé ạ!`,
+        `Dạ Sếp, em đang ở chế độ Cloud 24/7. Sếp có thể ra lệnh <b>"Buff 50 mắt 30 phút"</b>, <b>"Bơm 100 mắt 60 phút"</b>, <b>"Kiểm tra số dư Like3s"</b> hoặc chuyển sang Tab <b>🚀 Quảng Cáo GMV • Buff Mắt • Quản Lý Tool</b> nhé ạ!`,
         true
       );
     }
@@ -817,7 +817,7 @@
     function toggleVoiceCommand() {
       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SR) {
-        alert("Trình duyệt này chưa hỗ trợ nhận diện giọng nói trực tiếp. Anh Đạt vui lòng nhập vào ô chat nhé!");
+        alert("Trình duyệt này chưa hỗ trợ nhận diện giọng nói trực tiếp. Sếp vui lòng nhập vào ô chat nhé!");
         return;
       }
       if (isListening) return;
@@ -826,7 +826,7 @@
       rec.interimResults = false;
       rec.maxAlternatives = 1;
       isListening = true;
-      document.getElementById("statusText").innerText = "🎙️ J.A.R.V.I.S. đang lắng nghe lệnh của Anh Đạt...";
+      document.getElementById("statusText").innerText = "🎙️ J.A.R.V.I.S. đang lắng nghe lệnh của Sếp...";
       rec.onresult = (e) => {
         const transcript = e.results[0][0].transcript;
         handleUserCommand(transcript);
@@ -846,7 +846,7 @@
       const { k, next, mode } = getParams();
       ACCESS_KEY = k;
       if (!k) {
-        document.getElementById("statusText").innerHTML = "🔒 Thiết bị chưa có khóa ghép nối. Anh Đạt hãy mở link kèm mã khóa #k=...";
+        document.getElementById("statusText").innerHTML = "🔒 Thiết bị chưa có khóa ghép nối. Sếp hãy mở link kèm mã khóa #k=...";
         return;
       }
 
